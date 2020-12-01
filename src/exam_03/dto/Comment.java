@@ -15,9 +15,22 @@ public class Comment {
 				+ regDate + "]";
 	}
 
+	public Comment(int bidx, String writer, String content) {
+		super();
+		this.bidx = bidx;
+		this.writer = writer;
+		this.content = content;
+	}
+
 	public Comment() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public Comment(String writer, String content) {
+		super();
+		this.writer = writer;
+		this.content = content;
 	}
 
 	public Comment(int idx, int bidx, String writer, String content, Timestamp regDate) {

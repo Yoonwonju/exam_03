@@ -18,29 +18,42 @@
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 	String regDate = sdf.format(board.getRegDate());
+	
+	Comment comment = commentDao.selectCommentByIdx(idx);
+	
+	/* 업데이트  */
+	Board selectBoard = boardDao.selectBoardByNo(idx);
+	System.out.println("selectBoard --> " + selectBoard);
+	
 %>
 
 	<section>
 		<table border="1">
 			<h2> 게시물 조회 </h2>
-				<td> 제목 : <%=board.getSubject() %> </td>
+			<tr>
+				<td>제목 : <%=board.getSubject() %></td>
+			</tr>
 			<tr> 
 				<td> 작성자 : <%=board.getWriter() %> </td>
 				<td> 작성일 : <%=regDate %> </td>
 			</tr>
-			<tr> <%=board.getContent() %> </tr>
+			<tr>
+				<td><%=board.getContent() %> </td> 
+			</tr>
 		</table>
 		<table border="1">
-			<tr> 댓글 조회 </tr>
+			<tr>
+				<td> 댓글 조회 </td>
+			</tr>
 			<%
 				if(list == null){
-					out.println(" ");	
+					out.print(" ");	
 				}else{
 					for(Comment cList : list){
 			%>
 				<tr>
 					<td> <%=cList.getWriter() %> / <%=cList.getContent() %> / <%=cList.getRegDate() %>
-				 			/  <a>삭제</a>
+						/ <a href="commentDelete.jsp?idx=<%=idx %>" style="text-decoration: none">삭제</a>
 				 	</td>
 			 	</tr>
 				
@@ -50,17 +63,20 @@
 			%>
 		</table>
 		<table border="1">
-			<tr>댓글작성 </tr>
-			<tr>
-				<td> 작성자 : </td>
-				<td><input type="text"> </td>
-				<td> 댓글내용 : </td>
-				<td><input type="text"> </td>
-				<td><button type="submit"> 작성 완료 </button> </td>
-			</tr>
+		    	<form action="commentAdd.jsp?idx=<%=idx %>" method="post">
+		    		<input type="hidden" name="commentAdd" value="">
+					<tr><td>댓글작성 <td></tr>
+					<tr>
+						<td>작성자 : <input type="text" name="writer" id="writer"> </td>
+						<td>댓글내용 : <input type="text" name="content" id="content"> </td>
+						<td><button type="submit"> 작성 완료 </button> </td>
+					<!-- form 內 button type=submit -->
+					</tr>
+				</form>
+					<!-- form 外 button type=button onclick으로 js 실행 추가 -->
 		</table>
-		<button type="button" onclick="history.back();"> 목 록 </button>
-		<button type="button" onclick="location='update.jsp?idx=<%=idx %>'"> 수 정 </button>
-		<button type="button" onclick="location='list.jsp'"> 삭 제 </button>
+		<button type="button" onclick="location='list.jsp'"> 목 록 </button>
+		<button type="button" onclick="location='boardUpdate.jsp?idx=<%=selectBoard.getIdx() %>'"> 수 정 </button>
+		<button type="button" onclick="location='boardDelete.jsp?idx=<%=idx %>'"> 삭 제 </button>
 		
 	</section>

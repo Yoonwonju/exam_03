@@ -9,19 +9,19 @@
 
 	BoardDao boardDao = BoardDao.getInstance();
 	
-	String writer = request.getParameter("writer");
+	/* String writer = request.getParameter("writer");
 	String subject = request.getParameter("subject");
 	String content = request.getParameter("content");
 	
 	Board board = new Board(writer, subject, content);
 	
-	BoardDao.getInstance().insertBoard(board);
+	BoardDao.getInstance().insertBoard(board); */
 	
 %>
 
 	<section>
 		<h2>게시물 작성</h2>
-		<form action="list.jsp" method="post">
+		<form action="boardAdd.jsp" method="post" name="boardAdd" id="">
 		<table border="1">
 			<tr>
 				<td> 작성자 </td>

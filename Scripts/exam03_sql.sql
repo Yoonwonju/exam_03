@@ -67,7 +67,7 @@ select * from comment_tbl;
 select idx, writer, subject, content, regDate from board_tbl order by regDate desc;
 
 -- 게시글 조회
-select idx, writer, subject, content, regDate from BOARD_TBL where idx = 2;
+select idx, writer, subject, content, regDate from BOARD_TBL where idx = 12;
 
 -- 게시글 정보 입력
 insert into BOARD_TBL 

@@ -68,16 +68,15 @@ public class BoardDao {
 	
 	public int insertBoard(Board board) {
 		String sql = "insert into BOARD_TBL \r\n" + 
-				"values(?, ?, ?, ?, ?)";
+				"values(board_seq.nextval, ?, ?, ?, sysdate)";
 		try(Connection con = JdbcUtill.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);){
-			pstmt.setInt(1, board.getIdx());
-			pstmt.setString(2, board.getWriter());
-			pstmt.setString(3, board.getSubject());
-			pstmt.setString(4, board.getContent());
-			pstmt.setTimestamp(5, new Timestamp(new Date().getTime()));
 			
-			pstmt.executeUpdate();
+			pstmt.setString(1, board.getWriter());
+			pstmt.setString(2, board.getSubject());
+			pstmt.setString(3, board.getContent());
+			
+			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -95,7 +94,7 @@ public class BoardDao {
 			pstmt.setString(3, board.getContent());
 			pstmt.setInt(4, board.getIdx());
 			
-			pstmt.executeUpdate();
+			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -108,7 +107,7 @@ public class BoardDao {
 				PreparedStatement pstmt = con.prepareStatement(sql);){
 			pstmt.setInt(1, board.getIdx());
 			
-			pstmt.executeUpdate();
+			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

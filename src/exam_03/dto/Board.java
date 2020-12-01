@@ -14,16 +14,20 @@ public class Board {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	
+	public Board(int idx, String writer, String subject, String content) {
+		super();
+		this.idx = idx;
+		this.writer = writer;
+		this.subject = subject;
+		this.content = content;
+	}
+
 	public Board(String writer, String subject, String content) {
 		super();
 		this.writer = writer;
 		this.subject = subject;
 		this.content = content;
 	}
-
-
 
 	public Board(int idx, String writer, String subject, String content, Timestamp regDate) {
 		super();

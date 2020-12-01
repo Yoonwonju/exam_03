@@ -89,16 +89,14 @@ public class CommentDao {
 	
 	public int insertComment(Comment comment) {
 		String sql = "insert into comment_tbl \r\n" + 
-				"values(?, ?, ?, ?, ?)";
+				"values(comment_seq.nextval, ?, ?, ?, sysdate)";
 		try(Connection con = JdbcUtill.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);){
-			pstmt.setInt(1, comment.getIdx());
-			pstmt.setInt(2, comment.getBidx());
-			pstmt.setString(3, comment.getWriter());
-			pstmt.setString(4, comment.getContent());
-			pstmt.setTimestamp(5, new Timestamp(new Date().getTime()));
+			pstmt.setInt(1, comment.getBidx());
+			pstmt.setString(2, comment.getWriter());
+			pstmt.setString(3, comment.getContent());
 			
-			pstmt.executeUpdate();
+			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -111,7 +109,7 @@ public class CommentDao {
 				PreparedStatement pstmt = con.prepareStatement(sql);){
 			pstmt.setInt(1, comment.getIdx());
 			
-			pstmt.executeUpdate();			
+			return pstmt.executeUpdate();			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
